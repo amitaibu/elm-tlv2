@@ -4,7 +4,6 @@ import Effects exposing (Effects)
 import Html exposing (button, div, pre, text, Html)
 import Html.Events exposing (onClick)
 
-
 -- MODEL
 
 type alias Model =
@@ -44,7 +43,6 @@ update action model =
       ( { model | kids = model.kids + 1 }
       , Effects.none
       )
-
 
 -- VIEW
 
