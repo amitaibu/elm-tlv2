@@ -7,18 +7,16 @@ import Html.Events exposing (onClick)
 
 -- MODEL
 
-type Kids = Kids Int
-
 type alias Model =
   { age  : Int
-  , kids : Kids
+  , kids : Int
   , name : String
   }
 
 initialModel : Model
 initialModel =
   { age  = 38
-  , kids = Kids 3
+  , kids = 3
   , name = "Amitai"
   }
 
@@ -38,12 +36,12 @@ update : Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     Decrement ->
-      ( model
+      ( { model | kids = model.kids - 1 }
       , Effects.none
       )
 
     Increment ->
-      ( model
+      ( { model | kids = model.kids + 1 }
       , Effects.none
       )
 
@@ -53,22 +51,10 @@ update action model =
 view : Signal.Address Action -> Model -> Html
 view address model =
   div []
-    [ div [] [ text (toString model.name) ]
-    , div [] [ text (toString model.age) ]
-    , div [] [ text (toString model.kids) ]
+    [ div [] [ text <| "Name: " ++ model.name ]
+    , div [] [ text <| "Age: " ++ (toString model.age) ]
+    , div [] [ text <| "Kids num: " ++ (toString model.kids) ]
     , button [ onClick address Decrement ] [ text "-" ]
     , button [ onClick address Increment ] [ text "+" ]
     , pre [] [ text (toString model) ]
     ]
-
-viewAge : Int -> Html
-viewAge age =
-  div [] [text (toString age)]
-
-
-viewKids : Kids -> Html
-viewKids kids =
-  let
-    (Kids val) = kids
-  in
-    div [] [text (toString val)]
