@@ -1,7 +1,7 @@
 module Person where
 
 import Effects exposing (Effects)
-import Html exposing (..)
+import Html exposing (button, div, pre, text, Html)
 import Html.Events exposing (onClick)
 
 
