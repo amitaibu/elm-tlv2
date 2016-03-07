@@ -49,10 +49,22 @@ update action model =
 view : Signal.Address Action -> Model -> Html
 view address model =
   div []
-    [ div [] [ text <| "Name: " ++ model.name ]
-    , div [] [ text <| "Age: " ++ (toString model.age) ]
-    , div [] [ text <| "Kids num: " ++ (toString model.kids) ]
+    [ viewName model.name
+    , viewAge  model.age
+    , viewKids model.age
     , button [ onClick address Decrement ] [ text "-" ]
     , button [ onClick address Increment ] [ text "+" ]
     , pre [] [ text (toString model) ]
     ]
+
+viewName : String -> Html
+viewName name =
+  div [] [ text <| "Name: " ++ name ]
+
+viewAge : Int -> Html
+viewAge age =
+  div [] [ text <| "Age: " ++ (toString age) ]
+
+viewKids : Int -> Html
+viewKids kids =
+  div [] [ text <| "Kids num: " ++ (toString kids) ]
