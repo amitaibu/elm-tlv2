@@ -1,6 +1,6 @@
 
 import Effects exposing (Never)
-import Counter exposing (init, update, view)
+import Person exposing (init, update, view)
 import StartApp
 import Task
 

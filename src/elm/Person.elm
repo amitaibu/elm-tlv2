@@ -1,17 +1,25 @@
-module Counter where
+module Person where
 
 import Effects exposing (Effects)
 import Html exposing (..)
-import Html.Attributes exposing (style)
 import Html.Events exposing (onClick)
 
 
 -- MODEL
 
-type alias Model = Int
+type alias Model =
+  { age  : Int
+  , kids : Int
+  , name : String
+  }
 
 initialModel : Model
-initialModel = 0
+initialModel =
+  { age  = 37
+  , kids = 3
+  , name = "Amitai"
+  }
+
 
 init : (Model, Effects Action)
 init =
@@ -28,15 +36,14 @@ update : Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     Decrement ->
-      ( model - 1
-      , Effects.none
-      )
-          
-    Increment ->
-      ( model + 1
+      ( model
       , Effects.none
       )
 
+    Increment ->
+      ( model
+      , Effects.none
+      )
 
 
 -- VIEW
@@ -44,18 +51,7 @@ update action model =
 view : Signal.Address Action -> Model -> Html
 view address model =
   div []
-    [ button [ onClick address Decrement ] [ text "-" ]
-    , div [ countStyle ] [ text (toString model) ]
+    [ div [] [ text (toString model) ]
+    , button [ onClick address Decrement ] [ text "-" ]
     , button [ onClick address Increment ] [ text "+" ]
-    ]
-
-
-countStyle : Attribute
-countStyle =
-  style
-    [ ("font-size", "20px")
-    , ("font-family", "monospace")
-    , ("display", "inline-block")
-    , ("width", "50px")
-    , ("text-align", "center")
     ]
